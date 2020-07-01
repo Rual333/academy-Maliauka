@@ -5,8 +5,6 @@
  * 
  * Author: Ivan Maliauka
  * 
- * Just checking push and pull
- * 
  */
 
 package by.academy.lesson2;
