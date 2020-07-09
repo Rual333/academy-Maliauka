@@ -1,15 +1,20 @@
 package by.academy.lesson4;
 
 public class Product {
-	private String name;
-	private double discount;
+	public String name;
+	protected double discount;
 	private double price;
-	int quantity;
+	protected int quantity;
 
-	public Product(String name, double price, int quantity) {
+	public Product() {
+		super();
+	}
+
+	public Product(String name, double price, double discount, int quantity) {
 		super();
 		this.name = name;
 		this.price = price;
+		this.discount = discount;
 		this.quantity = quantity;
 	}
 
@@ -26,17 +31,45 @@ public class Product {
 	}
 
 	public double getPrice() {
-		return getFinalPrice(quantity, price);
+		return getFinalPrice();
 	}
 
-	protected double getFinalPrice(int quantity, double price) {
-		double finalPrice = price * getDiscount(quantity, discount) * quantity;
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
+
+	public double getDiscount() {
+		return this.discount;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public int getQuantity() {
+		return this.quantity;
+	}
+
+	protected double getFinalPrice() {
+		double finalPrice = this.price * this.quantity - (calculateDiscount(this.quantity) * this.price);
 		return finalPrice;
 	}
-	
-	private double getDiscount(int quantity, double discount) {
-		double finalDiscount = quantity*discount;
+
+	private double calculateDiscount(int quantity) {
+		double finalDiscount = 0;
+		if (quantity > 0) {
+			finalDiscount = getDiscount();
+		} else if (quantity > 5) {
+			finalDiscount = getDiscount() + 3;
+		} else if (quantity > 15) {
+			finalDiscount = getDiscount() + 7;
+		}
 		return finalDiscount;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Name: " + this.name + " Price: " + this.price + " Discount: " + getDiscount() + " Quantity: "
+				+ this.quantity;
+	}
 }
