@@ -1,6 +1,6 @@
 package by.academy.lesson4;
 
-public class Product {
+class Product {
 	public String name;
 	protected double discount;
 	private double price;

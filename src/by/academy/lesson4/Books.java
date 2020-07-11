@@ -1,6 +1,6 @@
 package by.academy.lesson4;
 
-public class Books extends Product {
+class Books extends Product {
 
 	private int numberOfPages = 0;
 
