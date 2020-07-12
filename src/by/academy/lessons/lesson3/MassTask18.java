@@ -13,9 +13,10 @@ public class MassTask18 {
 			arr1[i] = rand.nextInt(8) + 2;
 			arr2[i] = rand.nextInt(8) + 2;
 			for (int j = 0; j < i; j++) {
-				while ((arr1[i] == arr2[j] && arr2[i] == arr1[j]) || (arr1[i] == arr1[j] && arr2[i] == arr2[j])) {
+				while ((arr1[i] == arr2[j] & arr2[i] == arr1[j]) || (arr1[i] == arr1[j] & arr2[i] == arr2[j])) {
 					arr1[i] = rand.nextInt(8) + 2;
-					arr2[i] = rand.nextInt(8) + 2;			
+					arr2[i] = rand.nextInt(8) + 2;
+					j = 0;
 				} 
 			}
 			System.out.println(arr1[i] + " x " + arr2[i] + " = " + arr1[i] * arr2[i]);
