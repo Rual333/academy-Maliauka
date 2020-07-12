@@ -1,9 +1,10 @@
 package by.academy.lesson5;
 
 public class Product {
-	private double price;
-	private String name;
-	private int quantity;
+	protected double price;
+	protected String name;
+	protected int quantity;
+	protected double discount = 0;
 
 	public Product() {
 		super();
@@ -40,10 +41,19 @@ public class Product {
 		this.quantity = quantity;
 	}
 
+	public double getDiscount() {
+		return this.discount;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
+
 	public double getTotalCost() {
 		return quantity * price;
 	}
 
+	@Override
 	public String toString() {
 		return "Product " + name + ": price: " + price + ", quantity: " + quantity + ";\n";
 	}
