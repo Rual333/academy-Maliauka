@@ -14,6 +14,13 @@ public class Matrix {
 		super();
 	}
 
+	public Matrix(double[][] matr) {
+		super();
+		this.matr = matr;
+		this.kolStr = matr.length;
+		this.kolStol = matr[0].length;
+	}
+	
 	public Matrix(int kolStr, int kolStol) {
 		super();
 		this.kolStr = kolStr;
@@ -36,9 +43,13 @@ public class Matrix {
 	public void setKolStol(int kolStol) {
 		this.kolStol = kolStol;
 	}
-	
+
 	public double[][] getMatr() {
 		return this.matr;
+	}
+
+	public void setMatr(double[][] matr) {
+		this.matr = matr;
 	}
 
 	public void addMatr(Matrix matr) {
@@ -82,14 +93,15 @@ public class Matrix {
 				}
 			}
 		}
-		this.kolStol = matr.getMatr()[0].length;;
+		this.kolStol = matr.getMatr()[0].length;
+		;
 		this.matr = newMatr;
 	}
-	
+
 	public void fullTheMatr() {
 		for (int i = 0; i < kolStr; i++) {
 			for (int j = 0; j < kolStol; j++) {
-				matr[i][j] = random.nextDouble()*10;
+				matr[i][j] = random.nextDouble() * 10;
 			}
 		}
 	}
