@@ -15,10 +15,16 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String... strings) {
 		Scanner sc = new Scanner(System.in);
-		Deal deal = new Deal();
-		setSellerAndBuyer(deal, sc);
-		addToBasket(deal, sc);
-		System.out.println(deal.toString());
+		System.out.println("This is a program for recording deal information. Basket capasity is 15. ");
+		System.out.println("Please enter the number of deals you want to recording: ");
+		int num = sc.nextInt();
+		sc.nextLine();
+		for (int i = 0; i < num; i++) {
+			Deal deal = new Deal();
+			setSellerAndBuyer(deal, sc);
+			addToBasket(deal, sc);
+			System.out.println(deal.toString());
+		}
 		sc.close();
 
 	}
@@ -57,7 +63,6 @@ public class Main {
 	}
 
 	public static void setSellerAndBuyer(Deal deal, Scanner sc) {
-		System.out.println("This is a program for recording deal information. Basket capasity is 15");
 		System.out.println("Please enter the name of the seller: ");
 		deal.setSeller(new User(sc.nextLine()));
 		System.out.println("Please enter the name of the buyer: ");
