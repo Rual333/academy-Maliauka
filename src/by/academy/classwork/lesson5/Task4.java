@@ -3,6 +3,7 @@ package by.academy.classwork.lesson5;
 import java.util.Scanner;
 
 public class Task4 {
+	
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
@@ -14,22 +15,21 @@ public class Task4 {
 		String word = str[0];
 		
 		for (int i = 0; i < str.length; i++) {
-			String temp = "";
+			StringBuilder temp = new StringBuilder();
 			for (int j = 0; j < str[i].length(); j++) {
-				if (temp.indexOf(str[i].charAt(j)) < 0) {
-					temp +=str[i].charAt(j);
+				if (temp.indexOf(String.valueOf(str[i].charAt(j))) < 0) {
+					temp.append(str[i].charAt(j));
 				}
 			}
-			System.out.println(temp);
 			if (temp.length() < min) {
 				min = temp.length();
 				word = str[i];
 			}
 		}
 		
-		System.out.println(word);
-
-
+		System.out.println("The word that we need is: " + word);
 		sc.close();
 	}
+	
+	
 }

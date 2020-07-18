@@ -10,32 +10,36 @@ public class Task3 {
 		System.out.println("Enter the number of strings to input: ");
 		int num = sc.nextInt();
 		String[] str = new String[num];
-		String temp;
+		int sum = 0;
 		sc.nextLine();
-
+		StringBuilder less = new StringBuilder();
+		StringBuilder more = new StringBuilder();
+		
 		System.out.println("Enter strings: ");
 		for (int i = 0; i < num; i++) {
 			str[i] = sc.nextLine();
-		}	
-		for (int i = 0; i < num; i++) {	
-			for (int j = 0; j < num; j++) {
-				if (str[i].length() < str[j].length()) {
-					temp = str[i];
-					str[i] = str[j];
-					str[j] = temp;
-				}
+			sum += str[i].length();
+		}
+		sum /= num;
+		for (int i = 0; i < num; i++) {
+			if (str[i].length() < sum) {
+				less.append(str[i] + "; Length: " + str[i].length()+ "\n");
+			} else {
+				more.append(str[i] + "; Length: " + str[i].length()+ "\n");
 			}
 		}
-
-		System.out.println("Strings that have lenght less than half: ");
-		for (int i = 0; i < num/2; i++) {
-			System.out.println(str[i] + "; Length: " + str[i].length());
-		}
-		System.out.println("Strings that have lenght more than half: ");
-		for (int i = num/2; i < num; i++) {
-			System.out.println(str[i] + "; Length: " + str[i].length());
-		}
+		System.out.println("Strings that have lenght less than half:\n" + less);
+		System.out.println("Strings that have lenght more than half:\n" + more);
 		
 		sc.close();
 	}
+
+//
+//	int i = 0;i<num/2;i++)
+//	{
+//	int i = num / 2;i<num;i++)
+//	{
+//		System.out.println(str[i] + "; Length: " + str[i].length());
+//	}
+
 }
