@@ -31,21 +31,25 @@ public class Task6 {
 	}
 
 	private static boolean arePermuted(String s1, String s2) {
+		
 		if (s1.length() != s2.length()) {
 			return false;
 		}
-		String subs2 = s2;
+
+		int[] temp = new int[256];
+
 		for (int i = 0; i < s1.length(); i++) {
-			for (int j = 0; j < subs2.length(); j++) {
-				if (s1.charAt(i) == (subs2.charAt(j))) {
-					subs2 = subs2.substring(0, j) + subs2.substring(j + 1);
-					break;
-				}
+			temp[s1.charAt(i)]++;
+			temp[s2.charAt(i)]--;
+
+		}
+
+		for (int i : temp) {
+			if (i < 0) {
+				return false;
 			}
 		}
-		if (subs2.equals("")) {
-			return true;
-		} else
-			return false;
+		
+		return true;
 	}
 }
