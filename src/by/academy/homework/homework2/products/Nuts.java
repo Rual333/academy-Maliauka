@@ -36,7 +36,9 @@ public class Nuts extends Product {
 
 	@Override
 	public String toString() {
-		return "Nuts " + name + ": price: " + price + ", weight in gramm: " + weightInGramm + ", discount: "
-				+ calculateDiscount() + ";\n";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Nuts ").append(name).append(": price = ").append(price).append(", weight in gramm = ")
+				.append(weightInGramm).append(", discount = ").append(calculateDiscount()).append(";\n");
+		return builder.toString();
 	}
 }

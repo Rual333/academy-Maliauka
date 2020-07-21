@@ -28,7 +28,9 @@ public class Tools extends Product {
 
 	@Override
 	public String toString() {
-		return "Tools " + name + ": price: " + price + ", quantity: " + quantity + ", discount: "
-				+ calculateDiscount() + ";\n";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Tools ").append(name).append(": price = ").append(price).append(": quantity = ")
+				.append(quantity).append(", discount = ").append(calculateDiscount()).append(";\n");
+		return builder.toString();
 	}
 }

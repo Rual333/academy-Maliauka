@@ -10,10 +10,11 @@
 
 package by.academy.homework.homework2.products;
 
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class Main {
-	public static void main(String... strings) {
+	public static void main(String... strings) throws ParseException {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("This is a program for recording deal information. Basket capasity is 15. ");
 		System.out.println("Please enter the number of deals you want to recording: ");
@@ -23,6 +24,7 @@ public class Main {
 			Deal deal = new Deal();
 			setSellerAndBuyer(deal, sc);
 			addToBasket(deal, sc);
+			removeFromBasket(deal, sc);
 			System.out.println(deal.toString());
 		}
 		sc.close();
@@ -59,15 +61,29 @@ public class Main {
 				wantToAdd = true;
 			}
 		} while (wantToAdd);
-
 	}
 
-	public static void setSellerAndBuyer(Deal deal, Scanner sc) {
+	public static void removeFromBasket(Deal deal, Scanner sc) {
+		boolean wantToRemove;
+		String yn;
+		do {
+			wantToRemove = false;
+			System.out.println("Please enter the name of the product: ");
+			String nameOfPr = sc.nextLine();
+			deal.removeProduct(nameOfPr);
+			System.out.println("Do you want to remove another product to basket Y/N?");
+			yn = sc.nextLine();
+			if (yn.toLowerCase().equals("y") || yn.toLowerCase().equals("yes")) {
+				wantToRemove = true;
+			}
+		} while (wantToRemove);
+	}
+
+	public static void setSellerAndBuyer(Deal deal, Scanner sc) throws ParseException {
 		System.out.println("Please enter the name of the seller: ");
 		deal.setSeller(new User(sc.nextLine()));
 		System.out.println("Please enter the name of the buyer: ");
 		deal.setBuyer(new User(sc.nextLine()));
-
 	}
 
 	public static void addBooks(Deal deal, Scanner sc) {

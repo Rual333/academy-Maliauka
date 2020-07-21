@@ -1,11 +1,15 @@
 package by.academy.homework.homework2.products;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class Deal {
 	private User seller;
 	private User buyer;
 	private final static byte BASKET_CAPACITY = 15;
 	private Product[] products = new Product[BASKET_CAPACITY];
 	private int current_size = 0;
+	private Date deadline;
 
 	public Deal() {
 		super();
@@ -23,6 +27,21 @@ public class Deal {
 		this.seller = seller;
 		this.buyer = buyer;
 		this.products = products;
+		init();
+	}
+
+	private void init() {
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.DAY_OF_MONTH, 10);
+		this.deadline = c.getTime();
+	}
+
+	public Date getDeadline() {
+		return deadline;
+	}
+
+	public void setDeadline(Date deadline) {
+		this.deadline = deadline;
 	}
 
 	public User getSeller() {
@@ -74,13 +93,31 @@ public class Deal {
 		current_size++;
 	}
 
+	public void removeProduct(String nameOfProduct) {
+		for (int i = 0; i < products.length; i++) {
+			if (nameOfProduct.equals(products[i].name)) {
+				for (int j = i; j < products.length - 1; j++) {
+					products[j] = products[j + 1];
+				}
+				current_size--;
+				return;
+			}
+		}
+		System.out.println("There no such product in a basket");
+	}
+
 	@Override
 	public String toString() {
-		StringBuilder info = new StringBuilder();
-		info.append("Seller: " + seller.getName()).append(". Buyer: " + buyer.getName()).append(". Total quantity of products: ").append(current_size + "\n");
+		StringBuilder builder = new StringBuilder();
+		builder.append("Seller: ").append(seller.toString()).append("Buyer: ").append(buyer.toString())
+				.append("Total quantity of products: ").append(current_size).append("\n");
+
 		for (int i = 0; i < current_size; i++) {
-			info.append(products[i].toString());
+			builder.append(products[i].toString());
 		}
-		return info.append("Total cost is: ").append(getTotalCost()).toString();
+
+		builder.append("Total cost is: " + getTotalCost());
+
+		return builder.toString();
 	}
 }

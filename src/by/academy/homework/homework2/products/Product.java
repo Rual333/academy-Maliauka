@@ -55,6 +55,9 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product " + name + ": price: " + price + ", quantity: " + quantity + ";\n";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Product ").append(name).append(": price = ").append(price).append(", quantity = ")
+				.append(quantity).append(";\n");
+		return builder.toString();
 	}
 }

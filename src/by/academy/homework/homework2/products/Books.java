@@ -51,7 +51,11 @@ public class Books extends Product {
 
 	@Override
 	public String toString() {
-		return "Books " + name + ": price: " + price + ", quantity: " + quantity + ", number of pages: " + numOfPages
-				+ ", discount: " + calculateDiscount() + ";\n";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Books ").append(name).append(": price = ").append(price).append(", quantity = ").append(price)
+				.append(", number of pages = ").append(numOfPages).append(", discount = ").append(calculateDiscount())
+				.append(";\n");
+		return builder.toString();
 	}
+
 }

@@ -1,8 +1,8 @@
-package by.academy.classwork.lesson5;
+package by.academy.homework.homework2.Tasks;
 
 import java.util.Scanner;
 
-public class Task15 {
+public class Task11 {
 
 	public static void main(String... strings) {
 		Scanner sc = new Scanner(System.in);
