@@ -22,6 +22,7 @@ public class RegexTask3 {
 				c.setTime(date);
 				System.out.println(format1.format(c.getTime()));
 				c.add(Calendar.MONTH, 3);
+				
 				c.add(Calendar.DAY_OF_MONTH, 2);
 				c.add(Calendar.HOUR, 4);
 				System.out.println(format1.format(c.getTime()));
