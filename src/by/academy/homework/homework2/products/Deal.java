@@ -76,11 +76,11 @@ public class Deal {
 
 	@Override
 	public String toString() {
-		String info = "Seller: " + seller.getName() + ". Buyer: " + buyer.getName() + ". Total quantity of products: "
-				+ current_size + "\n";
+		StringBuilder info = new StringBuilder();
+		info.append("Seller: " + seller.getName()).append(". Buyer: " + buyer.getName()).append(". Total quantity of products: ").append(current_size + "\n");
 		for (int i = 0; i < current_size; i++) {
-			info += products[i].toString();
+			info.append(products[i].toString());
 		}
-		return info + "Total cost is: " + getTotalCost();
+		return info.append("Total cost is: ").append(getTotalCost()).toString();
 	}
 }
