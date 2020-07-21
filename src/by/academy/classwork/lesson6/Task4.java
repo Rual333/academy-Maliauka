@@ -14,7 +14,7 @@ public class Task4 {
 		System.out.println(endMS - startMS);
 
 		startMS = System.currentTimeMillis();
-
+			System.out.println(str);
 		for (int i = 0; i < 1000000; i++) {
 			sb.append(" ");
 		}
