@@ -24,8 +24,13 @@ public class Main {
 			Deal deal = new Deal();
 			setSellerAndBuyer(deal, sc);
 			addToBasket(deal, sc);
-			removeFromBasket(deal, sc);
-			System.out.println(deal.toString());
+			System.out.println("Do you want to remove products from basket?");
+			String yn = sc.nextLine();
+			if (yn.toLowerCase().equals("y") || yn.toLowerCase().equals("yes")) {
+				removeFromBasket(deal, sc);
+			} else {
+				System.out.println(deal.toString());
+			}
 		}
 		sc.close();
 
@@ -39,13 +44,13 @@ public class Main {
 			System.out.println(
 					"Please enter the number of the type of products: 1. Books; 2. Nuts; 3. Tools; 4. Other products.");
 			switch (sc.nextLine()) {
-			case "1", "Books":
+			case "1":
 				addBooks(deal, sc);
 				break;
-			case "2", "Nuts":
+			case "2":
 				addNuts(deal, sc);
 				break;
-			case "3", "Tools":
+			case "3":
 				addTools(deal, sc);
 				break;
 			default:
@@ -68,7 +73,7 @@ public class Main {
 		String yn;
 		do {
 			wantToRemove = false;
-			System.out.println("Please enter the name of the product: ");
+			System.out.println("Please enter the name of the product that you want to remove: ");
 			String nameOfPr = sc.nextLine();
 			deal.removeProduct(nameOfPr);
 			System.out.println("Do you want to remove another product to basket Y/N?");
@@ -88,26 +93,58 @@ public class Main {
 
 	public static void addBooks(Deal deal, Scanner sc) {
 		System.out.println("Please enter books name, price, quantity and number of pages separated by spaces: ");
-		String[] npq = sc.nextLine().split(" ");
+		String[] npq;
+		while (true) {
+			npq = sc.nextLine().split(" ");
+			if (npq.length == 4) {
+				break;
+			} else {
+				System.out.println("Wrong type, can you repeat please?");
+			}
+		}
 		deal.addProduct(
 				new Books(npq[0], Double.parseDouble(npq[1]), Integer.parseInt(npq[2]), Integer.parseInt(npq[3])));
 	}
 
 	public static void addNuts(Deal deal, Scanner sc) {
 		System.out.println("Please enter nuts name, price and weight in gramm separated by spaces: ");
-		String[] npq = sc.nextLine().split(" ");
+		String[] npq;
+		while (true) {
+			npq = sc.nextLine().split(" ");
+			if (npq.length == 3) {
+				break;
+			} else {
+				System.out.println("Wrong type, can you repeat please?");
+			}
+		}
 		deal.addProduct(new Nuts(npq[0], Double.parseDouble(npq[1]), Integer.parseInt(npq[2])));
 	}
 
 	public static void addTools(Deal deal, Scanner sc) {
 		System.out.println("Please enter tool name, price and quantity separated by spaces: ");
-		String[] npq = sc.nextLine().split(" ");
+		String[] npq;
+		while (true) {
+			npq = sc.nextLine().split(" ");
+			if (npq.length == 4) {
+				break;
+			} else {
+				System.out.println("Wrong type, can you repeat please?");
+			}
+		}
 		deal.addProduct(new Tools(npq[0], Double.parseDouble(npq[1]), Integer.parseInt(npq[2])));
 	}
 
 	public static void addProduct(Deal deal, Scanner sc) {
 		System.out.println("Please enter product name, price and quantity separated by spaces: ");
-		String[] npq = sc.nextLine().split(" ");
+		String[] npq;
+		while (true) {
+			npq = sc.nextLine().split(" ");
+			if (npq.length == 4) {
+				break;
+			} else {
+				System.out.println("Wrong type, can you repeat please?");
+			}
+		}
 		deal.addProduct(new Product(npq[0], Double.parseDouble(npq[1]), Integer.parseInt(npq[2])));
 	}
 
