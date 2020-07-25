@@ -13,9 +13,9 @@ public class User {
 
 	public static SimpleDateFormat format1 = new SimpleDateFormat("d/M/yyyy");
 	public static SimpleDateFormat format2 = new SimpleDateFormat("d-M-yyyy");
-	private String name;
-	private String phone;
-	private String email;
+	private String name = "No name";
+	private String phone = "No phone";
+	private String email = "No email";
 	private Date dateOfBirth;
 	private Scanner sc = new Scanner(System.in);
 
@@ -39,7 +39,7 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public String getPhone() {
 		return phone;
 	}
@@ -99,8 +99,8 @@ public class User {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append(name).append(", phone = ").append(phone).append(", email = ").append(email)
-				.append(", dateOfBirth = ").append(dateOfBirth).append(";\n");
+		builder.append("name: ").append(name).append(", phone = ").append(phone).append(", email = ").append(email)
+				.append(", dateOfBirth = ").append(Deal.dateformat.format(dateOfBirth)).append(";\n");
 		return builder.toString();
 	}
 }

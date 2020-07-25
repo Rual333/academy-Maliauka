@@ -16,136 +16,84 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String... strings) throws ParseException {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("This is a program for recording deal information. Basket capasity is 15. ");
+		System.out.println("Hi! This is a program for recording deal information. Basket capasity is 15. ");
 		System.out.println("Please enter the number of deals you want to recording: ");
 		int num = sc.nextInt();
 		sc.nextLine();
+		Deal[] arrDeal = new Deal[num];
 		for (int i = 0; i < num; i++) {
-			Deal deal = new Deal();
-			setSellerAndBuyer(deal, sc);
-			addToBasket(deal, sc);
-			System.out.println("Do you want to remove products from basket?");
-			String yn = sc.nextLine();
-			if (yn.toLowerCase().equals("y") || yn.toLowerCase().equals("yes")) {
-				removeFromBasket(deal, sc);
-			} else {
-				System.out.println(deal.toString());
-			}
+			arrDeal[i] = new Deal();
+			System.out.println("Deal № " + (i + 1) + ":");
+			menu(arrDeal[i], sc, arrDeal);
 		}
 		sc.close();
-
+		System.out.println("Bye!");
 	}
 
-	public static void addToBasket(Deal deal, Scanner sc) {
-		boolean wantToAdd;
-		String yn;
-		do {
-			wantToAdd = false;
-			System.out.println(
-					"Please enter the number of the type of products: 1. Books; 2. Nuts; 3. Tools; 4. Other products.");
-			switch (sc.nextLine()) {
-			case "1":
-				addBooks(deal, sc);
+	public static void menu(Deal deal, Scanner sc, Deal[] arrDeal) throws ParseException {
+
+		int x = 0;
+		String s = "";
+
+		while (!"7".equals(s)) {
+			System.out.println("1. To add seller and buyer info enter 1");
+			System.out.println("2. To add new product into the basket enter 2");
+			System.out.println("3. To remove products from basket enter 3");
+			System.out.println("4. To print the result of this deal on the screen enter 4");
+			System.out.println("5. To print the result of another deal on the screen enter 5");
+			System.out.println("6. To print status of the deal enter 6");
+			System.out.println("7. To enter info about the next deal or to exit the program enter 7");
+			s = sc.nextLine();
+
+			try {
+				x = Integer.parseInt(s);
+			} catch (NumberFormatException e) {
+				System.out.println("Неверный ввод");
+			}
+
+			switch (x) {
+			case 1:
+				Deal.setSellerAndBuyer(deal, sc);
 				break;
-			case "2":
-				addNuts(deal, sc);
+			case 2:
+				Deal.addToBasket(deal, sc);
 				break;
-			case "3":
-				addTools(deal, sc);
+			case 3:
+				Deal.removeFromBasket(deal, sc);
+				break;
+			case 4:
+				printDealInfo(deal);
+				break;
+			case 5:
+				printDealInfo(getNumOfDeal(sc, arrDeal));
+				break;
+			case 6:
+				System.out.println(getNumOfDeal(sc, arrDeal).getStatus());
+				break;
+			case 7:
 				break;
 			default:
-				addProduct(deal, sc);
-			}
-			if (deal.getCurrent_size() == Deal.getBasketCapacity()) {
-				System.out.println("Basket is full");
-				break;
-			}
-			System.out.println("Do you want to add another product to basket Y/N?");
-			yn = sc.nextLine();
-			if (yn.toLowerCase().equals("y") || yn.toLowerCase().equals("yes")) {
-				wantToAdd = true;
-			}
-		} while (wantToAdd);
-	}
-
-	public static void removeFromBasket(Deal deal, Scanner sc) {
-		boolean wantToRemove;
-		String yn;
-		do {
-			wantToRemove = false;
-			System.out.println("Please enter the name of the product that you want to remove: ");
-			String nameOfPr = sc.nextLine();
-			deal.removeProduct(nameOfPr);
-			System.out.println("Do you want to remove another product to basket Y/N?");
-			yn = sc.nextLine();
-			if (yn.toLowerCase().equals("y") || yn.toLowerCase().equals("yes")) {
-				wantToRemove = true;
-			}
-		} while (wantToRemove);
-	}
-
-	public static void setSellerAndBuyer(Deal deal, Scanner sc) throws ParseException {
-		System.out.println("Please enter the name of the seller: ");
-		deal.setSeller(new User(sc.nextLine()));
-		System.out.println("Please enter the name of the buyer: ");
-		deal.setBuyer(new User(sc.nextLine()));
-	}
-
-	public static void addBooks(Deal deal, Scanner sc) {
-		System.out.println("Please enter books name, price, quantity and number of pages separated by spaces: ");
-		String[] npq;
-		while (true) {
-			npq = sc.nextLine().split(" ");
-			if (npq.length == 4) {
-				break;
-			} else {
-				System.out.println("Wrong type, can you repeat please?");
+				System.out.println("Incorrect input");
 			}
 		}
-		deal.addProduct(
-				new Books(npq[0], Double.parseDouble(npq[1]), Integer.parseInt(npq[2]), Integer.parseInt(npq[3])));
 	}
-
-	public static void addNuts(Deal deal, Scanner sc) {
-		System.out.println("Please enter nuts name, price and weight in gramm separated by spaces: ");
-		String[] npq;
-		while (true) {
-			npq = sc.nextLine().split(" ");
-			if (npq.length == 3) {
-				break;
-			} else {
-				System.out.println("Wrong type, can you repeat please?");
-			}
+	
+	public static Deal getNumOfDeal(Scanner sc, Deal[] arrDeal) {
+		System.out.println("Enter the number of the deal: ");
+		int c = sc.nextInt() - 1;
+		sc.nextLine();
+		if (null == arrDeal[c]) {
+			System.out.println("There are no information about such deal");
+			return new Deal();
 		}
-		deal.addProduct(new Nuts(npq[0], Double.parseDouble(npq[1]), Integer.parseInt(npq[2])));
+		return arrDeal[c];
 	}
 
-	public static void addTools(Deal deal, Scanner sc) {
-		System.out.println("Please enter tool name, price and quantity separated by spaces: ");
-		String[] npq;
-		while (true) {
-			npq = sc.nextLine().split(" ");
-			if (npq.length == 4) {
-				break;
-			} else {
-				System.out.println("Wrong type, can you repeat please?");
-			}
+	public static void printDealInfo(Deal deal) {
+		if (null == deal) {
+			System.out.println("There are no such deal");
+		} else {
+			System.out.println(deal.toString());
 		}
-		deal.addProduct(new Tools(npq[0], Double.parseDouble(npq[1]), Integer.parseInt(npq[2])));
 	}
-
-	public static void addProduct(Deal deal, Scanner sc) {
-		System.out.println("Please enter product name, price and quantity separated by spaces: ");
-		String[] npq;
-		while (true) {
-			npq = sc.nextLine().split(" ");
-			if (npq.length == 4) {
-				break;
-			} else {
-				System.out.println("Wrong type, can you repeat please?");
-			}
-		}
-		deal.addProduct(new Product(npq[0], Double.parseDouble(npq[1]), Integer.parseInt(npq[2])));
-	}
-
 }

@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class BelarusPhoneValidator implements Validator {
-	private Pattern p = Pattern.compile("^\\+37529[\\d]{7}$");
+	private Pattern p = Pattern.compile("^\\+375 ?((29)|(33)|(44)) ?[\\d]{3}[ -]?[\\d]{2}[ -]?[\\d]{2}$");
 
 	@Override
 	public boolean validate(String vString) {
@@ -12,4 +12,3 @@ public class BelarusPhoneValidator implements Validator {
 		return m.find();
 	}
 }
-
