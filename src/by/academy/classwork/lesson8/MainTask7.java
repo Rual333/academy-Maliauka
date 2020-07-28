@@ -3,11 +3,11 @@ package by.academy.classwork.lesson8;
 public class MainTask7 {
 
 	public static void main(String... strings) {
-		MatrixTask7<Double> m1 = new MatrixTask7<>(3, 5, new Double[3][5]);
+		MatrixTask7<Integer> m1 = new MatrixTask7<>(3, 5);
 		m1.fullTheMatr();
 		m1.printOnScreen();
 
-		MatrixTask7<Double> m2 = new MatrixTask7<>(5, 4, new Double[5][4]);
+		MatrixTask7<Double> m2 = new MatrixTask7<>(5, 4);
 		m2.fullTheMatr();
 		m2.printOnScreen();
 
@@ -20,7 +20,7 @@ public class MainTask7 {
 		m1.multTwoMatrix(m2);
 		m1.printOnScreen();
 
-		MatrixTask7<Double> m3 = new MatrixTask7<>(4, 7, new Double[4][7]);
+		MatrixTask7<Long> m3 = new MatrixTask7<>(4, 7);
 		m3.fullTheMatr();
 		m3.printOnScreen();
 		m1.multTwoMatrix(m3);

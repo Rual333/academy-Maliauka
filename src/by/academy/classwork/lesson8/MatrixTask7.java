@@ -22,11 +22,11 @@ public class MatrixTask7<T extends Number> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public MatrixTask7(int kolStr, int kolStol, T[][] t) {
+	public MatrixTask7(int kolStr, int kolStol) {
 		super();
 		this.kolStr = kolStr;
 		this.kolStol = kolStol;
-		this.matr = t;
+		this.matr = (T[][]) new Number[kolStr][kolStol];
 	}
 
 	public int getKolStr() {
@@ -53,8 +53,8 @@ public class MatrixTask7<T extends Number> {
 		this.matr = matr;
 	}
 
-	@SuppressWarnings("unchecked")
-	public void addMatr(MatrixTask7<T> matr) {
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	public void addMatr(MatrixTask7<?> matr) {
 		int minStr = Math.min(matr.getMatr().length, this.matr.length);
 		int minStol = Math.min(matr.getMatr()[0].length, this.matr[0].length);
 		for (int i = 0; i < minStr; i++) {
@@ -64,7 +64,7 @@ public class MatrixTask7<T extends Number> {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	public void multByNum(double num) {
 		for (int i = 0; i < kolStr; i++) {
 			for (int j = 0; j < kolStol; j++) {
@@ -83,13 +83,18 @@ public class MatrixTask7<T extends Number> {
 		System.out.println();
 	}
 
-	@SuppressWarnings("unchecked")
-	public void multTwoMatrix(MatrixTask7<T> matr) {
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	public void multTwoMatrix(MatrixTask7<?> matr) {
 		if (this.matr[0].length != matr.getMatr().length) {
 			System.out.println("Multiplicate is impossible");
 			return;
 		}
-		newMatr = (T[][]) new Object[this.matr.length][matr.getMatr()[0].length];
+		newMatr = (T[][]) new Number[this.matr.length][matr.getMatr()[0].length];
+		for (int i = 0; i < this.matr.length; i++) {
+			for (int j = 0; j < matr.getMatr()[0].length; j++) {
+				newMatr[i][j] = (T) new Double(0.0);
+			}
+		}
 		for (int i = 0; i < kolStr; i++) {
 			for (int j = 0; j < matr.getMatr()[0].length; j++) {
 				for (int r = 0; r < matr.getMatr().length; r++) {
@@ -103,11 +108,11 @@ public class MatrixTask7<T extends Number> {
 		this.matr = newMatr;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	public void fullTheMatr() {
 		for (int i = 0; i < kolStr; i++) {
 			for (int j = 0; j < kolStol; j++) {
-				matr[i][j] = (T) new Double(random.nextDouble());
+				matr[i][j] = (T) new Integer(random.nextInt() / 1000000);
 			}
 		}
 	}
