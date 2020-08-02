@@ -86,9 +86,13 @@ public class Task2<T> {
 
 	public void removeByInd(int i) {
 		if (null == array || i < 0 || i > array.length - 1) {
+			System.out.println("index out of array length");
 			return;
-		} else {
+		} else if (i == array.length - 1) {
 			array[i] = null;
+		} else {
+			System.arraycopy(array, i + 1, array, i, array.length - 1 - i);
+			array[array.length - 1] = null;
 		}
 	}
 
@@ -98,7 +102,7 @@ public class Task2<T> {
 		} else {
 			for (int i = 0; i < array.length; i++) {
 				if (t.equals(array[i])) {
-					array[i] = null;
+					removeByInd(i);
 					return;
 				}
 			}

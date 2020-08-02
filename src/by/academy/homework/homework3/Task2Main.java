@@ -14,7 +14,7 @@ public class Task2Main {
 		arr1.addToIndex(155.0, 7);
 		arr1.printLastNoNullElement();
 		System.out.println(Arrays.toString(arr1.getArray()));
-		arr1.addToIndex(145.0, 8);
+		arr1.addToIndex(145.0, 7);
 		System.out.println(Arrays.toString(arr1.getArray()));
 		arr1.removeByInd(8);
 		System.out.println(Arrays.toString(arr1.getArray()));
