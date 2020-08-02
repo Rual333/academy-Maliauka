@@ -8,7 +8,7 @@
  * 
  */
 
-package by.academy.homework.homework2.products;
+package by.academy.homework.homework3.products;
 
 import java.text.ParseException;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package by.academy.homework.homework2.products;
+package by.academy.homework.homework3.products;
 
 @ProducerInfo(company = "Budapest's market", name = "products", number = 0, prodyctTypes = { "Books", "Nuts", "Tools",
 		"Other products" })
