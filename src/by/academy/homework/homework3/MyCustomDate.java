@@ -9,43 +9,61 @@
 
 package by.academy.homework.homework3;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+public class MyCustomDate {
 
-public class Date {
-
-	Pattern p = Pattern.compile("^([0]?[1-9]|[1-9]|[1|2][0-9]|[3][0|1])-([0][1-9]|[1-9]|1[0-2])-\\d{4}");
 	Year year;
 	Month month;
 	Day day;
 
-	Date() {
+	public MyCustomDate() {
 		super();
 	}
 
-	Date(String date) {
+	public MyCustomDate(String date) {
 		super();
 		setDate(date);
 	}
 
-	Date(String day, String month, String year) {
+	public MyCustomDate(int y, int m, int d) {
 		super();
-		setDate(String.join("-", day, month, year));
+		year = new Year(y);
+		month = new Month(m);
+		day = new Day(d);
 	}
 
 	public void setDate(String date) {
-		if (!validateDate(date)) {
-			System.out.println("Wrong date format");
-			return;
-		}
 		year = new Year(date.substring(6));
 		month = new Month(date.substring(3, 5));
 		day = new Day(date.substring(0, 2));
 	}
 
+	public void setYear(int y) {
+		this.year.year = y;
+	}
+
+	public int getYear() {
+		return this.year.year;
+	}
+
+	public void setMonth(int m) {
+		this.month.month = m;
+	}
+
+	public int getMonth() {
+		return this.month.month;
+	}
+
+	public void setDay(int d) {
+		this.day.day = d;
+	}
+
+	public int getDay() {
+		return this.day.day;
+	}
+
 	class Year {
 
-		short year;
+		int year;
 
 		Year() {
 			super();
@@ -53,14 +71,19 @@ public class Date {
 
 		Year(String year) {
 			super();
-			this.year = Short.parseShort(year);
+			this.year = Integer.parseInt(year);
+		}
+
+		Year(int year) {
+			super();
+			this.year = year;
 		}
 
 	}
 
 	class Month {
 
-		byte month;
+		int month;
 
 		Month() {
 			super();
@@ -68,13 +91,19 @@ public class Date {
 
 		Month(String month) {
 			super();
-			this.month = Byte.parseByte(month);
+			this.month = Integer.parseInt(month);
 		}
+
+		Month(int month) {
+			super();
+			this.month = month;
+		}
+
 	}
 
 	class Day {
 
-		byte day;
+		int day;
 
 		Day() {
 			super();
@@ -82,7 +111,12 @@ public class Date {
 
 		Day(String day) {
 			super();
-			this.day = Byte.parseByte(day);
+			this.day = Integer.parseInt(day);
+		}
+
+		Day(int day) {
+			super();
+			this.day = day;
 		}
 	}
 
@@ -100,11 +134,6 @@ public class Date {
 		}
 	}
 
-	private boolean validateDate(String date) {
-		Matcher m = p.matcher(date);
-		return m.find();
-	}
-
 	public boolean isLeapYear() {
 		int y = this.year.year;
 		if ((y % 4 != 0) || (y % 100 == 0 && y % 400 != 0)) {
@@ -114,8 +143,8 @@ public class Date {
 		}
 	}
 
-	private int getInitCodeOfYear() {
-		switch ((year.year / 100) % 4) {
+	private static int getInitCodeOfYear(MyCustomDate date) {
+		switch ((date.getYear() / 100) % 4) {
 		case 0:
 			return 6;
 		case 1:
@@ -130,12 +159,12 @@ public class Date {
 		}
 	}
 
-	private int getCodeOfYear() {
-		return (getInitCodeOfYear() + year.year % 100 + (year.year % 100) / 4) % 7;
+	private static int getCodeOfYear(MyCustomDate date) {
+		return (getInitCodeOfYear(date) + date.getYear() % 100 + (date.getYear() % 100) / 4) % 7;
 	}
 
-	private int getCodeOfMonth() {
-		switch (month.month) {
+	private static int getCodeOfMonth(MyCustomDate date) {
+		switch (date.getMonth()) {
 		case 1:
 			return 1;
 		case 2:
@@ -169,9 +198,9 @@ public class Date {
 	public void printDayOfWeek() {
 		int code;
 		if (isLeapYear() && month.month < 3) {
-			code = (day.day + getCodeOfMonth() + getCodeOfYear() - 1) % 7;
+			code = (day.day + getCodeOfMonth(this) + getCodeOfYear(this) - 1) % 7;
 		} else {
-			code = (day.day + getCodeOfMonth() + getCodeOfYear()) % 7;
+			code = (day.day + getCodeOfMonth(this) + getCodeOfYear(this)) % 7;
 		}
 		System.out.println(getWeekDayName(code));
 	}
@@ -197,21 +226,21 @@ public class Date {
 		}
 	}
 
-	public int getDaysinYear() {
-		int y = year.year - 1;
-		int m = month.month;
-		int d = day.day;
+	public static int getDaysinYear(MyCustomDate date) {
+		int y = date.getYear() - 1;
+		int m = date.getMonth();
+		int d = date.getDay();
 		int result = y * 365 + (y / 4) + d;
 		for (int i = 1; i < m; i++) {
 			result += getNumDays(i);
 		}
-		if (isLeapYear() && month.month > 3) {
+		if (date.isLeapYear() && m > 3) {
 			result++;
 		}
 		return result;
 	}
 
-	private int getNumDays(int m) {
+	private static int getNumDays(int m) {
 		switch (m) {
 		case 1, 3, 5, 7, 8, 10, 12:
 			return 31;
@@ -225,9 +254,9 @@ public class Date {
 		}
 	}
 
-	public int calculateInterval(Date anotherDate) {
-		int daysInThisDate = getDaysinYear();
-		int daysInAnotherDate = anotherDate.getDaysinYear();
+	public static int calculateInterval(MyCustomDate date, MyCustomDate anotherDate) {
+		int daysInThisDate = getDaysinYear(date);
+		int daysInAnotherDate = getDaysinYear(anotherDate);
 		return Math.abs(daysInThisDate - daysInAnotherDate);
 	}
 
