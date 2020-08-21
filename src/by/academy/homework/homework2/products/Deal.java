@@ -1,7 +1,5 @@
 package by.academy.homework.homework2.products;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Deal {
+	private String nameOfDeal;
 	private User seller;
 	private User buyer;
 	private List<Product> products = new ArrayList<>();
@@ -42,6 +41,14 @@ public class Deal {
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DAY_OF_MONTH, 10);
 		this.deadline = c.getTime();
+	}
+
+	public String getNameOfDeal() {
+		return nameOfDeal;
+	}
+
+	public void setNameOfDeal(String nameOfDeal) {
+		this.nameOfDeal = nameOfDeal;
 	}
 
 	public Date getDeadline() {
@@ -225,22 +232,13 @@ public class Deal {
 		return temp;
 	}
 
-	public void writeToFile() {
-		try (PrintWriter printWriter = new PrintWriter("DealInfo.txt")) {
-			printWriter.println(toString());
-		} catch (IOException ex) {
-			System.out.println(ex.getMessage());
-		}
-
-	}
-
 	@Override
 	public String toString() {
 
 		StringBuilder builder = new StringBuilder();
-
+		builder.append("Name of the deal: " + nameOfDeal + "\n");
 		if (null == seller) {
-			System.out.println("You don't enter seller and buyer info!");
+			builder.append("There is no seller and buyer info!\n");
 		} else {
 			builder.append("Seller: ").append(seller.toString()).append("Buyer: ").append(buyer.toString())
 					.append("\n");

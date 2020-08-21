@@ -10,6 +10,9 @@
 
 package by.academy.homework.homework2.products;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.Scanner;
 
@@ -23,11 +26,13 @@ public class Main {
 		Deal[] arrDeal = new Deal[num];
 		for (int i = 0; i < num; i++) {
 			arrDeal[i] = new Deal();
-			System.out.println("Deal № " + (i + 1) + ":");
+			System.out.println("Please enter the name of the " + (i + 1) + " deal:");
+			arrDeal[i].setNameOfDeal(sc.nextLine());
+			System.out.println("Deal " + arrDeal[i].getNameOfDeal() + ":");
 			menu(arrDeal[i], sc, arrDeal);
+			writeToFile(arrDeal[i]);
 		}
 		sc.close();
-		arrDeal[0].writeToFile();
 		System.out.println("Bye!");
 	}
 
@@ -73,6 +78,8 @@ public class Main {
 				break;
 			case 7:
 				break;
+			case 8:
+				break;
 			default:
 				System.out.println("Incorrect input");
 			}
@@ -95,6 +102,15 @@ public class Main {
 			System.out.println("There are no such deal");
 		} else {
 			System.out.println(deal.toString());
+		}
+	}
+
+	public static void writeToFile(Deal deal) {
+		File dealInfo = new File("src/by/academy/homework/homework2/deals info/" + deal.getNameOfDeal() + ".txt");
+		try (PrintWriter fw = new PrintWriter(dealInfo)) {
+			fw.append(deal.toString() + "\n");
+		} catch (IOException ex) {
+			System.out.println(ex.getMessage());
 		}
 	}
 }
