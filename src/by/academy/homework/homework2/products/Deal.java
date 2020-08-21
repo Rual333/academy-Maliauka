@@ -1,5 +1,7 @@
 package by.academy.homework.homework2.products;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -221,6 +223,15 @@ public class Deal {
 			}
 		}
 		return temp;
+	}
+
+	public void writeToFile() {
+		try (PrintWriter printWriter = new PrintWriter("DealInfo.txt")) {
+			printWriter.println(toString());
+		} catch (IOException ex) {
+			System.out.println(ex.getMessage());
+		}
+
 	}
 
 	@Override

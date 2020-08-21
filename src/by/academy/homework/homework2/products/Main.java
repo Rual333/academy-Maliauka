@@ -27,6 +27,7 @@ public class Main {
 			menu(arrDeal[i], sc, arrDeal);
 		}
 		sc.close();
+		arrDeal[0].writeToFile();
 		System.out.println("Bye!");
 	}
 

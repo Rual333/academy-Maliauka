@@ -44,7 +44,7 @@ public class Task1 {
 
 		Map<String, Integer> catalog = new HashMap<>();
 
-		putInMap(catalog, "A");
+		putInMap(catalog, "D");
 		putInMap(catalog, "A");
 		putInMap(catalog, "A");
 		putInMap(catalog, "B");
