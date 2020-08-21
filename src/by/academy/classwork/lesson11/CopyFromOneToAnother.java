@@ -12,8 +12,17 @@ import java.io.IOException;
 
 public class CopyFromOneToAnother {
 	public static void main(String[] args) {
-		File fileOut = new File("FileToCopyFrom.txt");
-		File fileIn = new File("FileToCopyTo.txt");
+		File dir = new File("src/by/academy/classwork/lesson11");
+
+		File fileOut = new File(dir, "FileToCopyFrom.txt");
+		if (!fileOut.exists()) {
+			try {
+				fileOut.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		File fileIn = new File(dir, "FileToCopyTo.txt");
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileIn));
 				BufferedReader br = new BufferedReader(new FileReader(fileOut))) {
 			int a;
