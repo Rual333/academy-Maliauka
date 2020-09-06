@@ -1,0 +1,7 @@
+Name of the deal: 1 deal
+There is no seller and buyer info!
+Total quantity of products: 1
+Nuts ceui: price = 34.0, weight in gramm = 345.0, discount = 0.0;
+Total cost is: 11.73
+Deadline: 31/08/2020
+

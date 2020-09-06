@@ -1,0 +1,7 @@
+Name of the deal: deal 2
+There is no seller and buyer info!
+Total quantity of products: 1
+Books cenui3: price = 434.0, quantity = 434.0, number of pages = 345, discount = 0.1;
+Total cost is: 13280.4
+Deadline: 31/08/2020
+
