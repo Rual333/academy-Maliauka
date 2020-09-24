@@ -5,9 +5,9 @@ import java.util.concurrent.Semaphore;
 public class Ship extends Thread {
 	public static final int CARRYING = 5;
 	private int shipNum;
-	private int capacity = 4;
-	private int needToPut = 2;
-	private int needToGet = 2;
+	private int capacity = 3;
+	private int needToPut = 3;
+	private int needToGet = 5;
 	private Port port;
 
 	public static Semaphore SEMAPHORE = new Semaphore(Port.NUMBER_OF_PIERS, true);
@@ -47,7 +47,7 @@ public class Ship extends Thread {
 							break;
 						}
 				}
-				while (capacity > 0 && needToPut > 0 && port.getQuantityOfContainers() != Port.STORE_CAPACITY) {
+				while (capacity > 0 && needToPut > 0 && port.getQuantityOfContainers() < Port.STORE_CAPACITY) {
 					port.putContainer();
 					System.out.println("Ship" + shipNum + " put container in store, containers in store: "
 							+ port.getQuantityOfContainers());
@@ -56,7 +56,7 @@ public class Ship extends Thread {
 				}
 
 				sleep(1000);
-				while (capacity < CARRYING && needToGet > 0 && port.getQuantityOfContainers() != 0) {
+				while (capacity < CARRYING && needToGet > 0 && port.getQuantityOfContainers() > 0) {
 					port.getContainer();
 					System.out.println("Ship" + shipNum + " get container in store, containers in store: "
 							+ port.getQuantityOfContainers());
