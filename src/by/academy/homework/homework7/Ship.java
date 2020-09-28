@@ -3,7 +3,7 @@ package by.academy.homework.homework7;
 import java.util.concurrent.Semaphore;
 
 public class Ship extends Thread {
-	public static final int CARRYING = 5;
+	public static final int CARRYING = 8;
 	private int shipNum;
 	private int capacity = 3;
 	private int needToPut = 3;
